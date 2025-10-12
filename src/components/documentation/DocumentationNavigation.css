@@ -1,0 +1,127 @@
+.documentation-navigation {
+  width: 280px;
+  background-color: white;
+  background-image: linear-gradient(to bottom, #ffffff, #f9fbff);
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: var(--card-shadow);
+  position: sticky;
+  top: 20px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.navigation-title {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  color: var(--primary-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.8rem;
+  font-weight: 600;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.navigation-title::before {
+  content: '📑';
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.navigation-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: nav-counter;
+}
+
+.navigation-item {
+  padding: 0.7rem 0.5rem;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+  border-radius: 6px;
+  margin-bottom: 0.3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.navigation-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background-color: var(--primary-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.navigation-item:hover {
+  color: var(--primary-color);
+  background-color: rgba(30, 76, 154, 0.05);
+  padding-left: 1rem;
+  transform: translateX(2px);
+}
+
+.navigation-item:hover::before {
+  opacity: 1;
+  left: 0;
+}
+
+.navigation-item.level-1 {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-color);
+  counter-increment: nav-counter;
+  display: flex;
+  align-items: center;
+}
+
+.navigation-item.level-1::after {
+  content: counter(nav-counter, decimal-leading-zero);
+  font-size: 0.7rem;
+  color: rgba(30, 76, 154, 0.4);
+  margin-left: 0.5rem;
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navigation-item.level-1:hover::after {
+  opacity: 1;
+}
+
+.navigation-item.level-2 {
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.navigation-item.level-3 {
+  padding-left: 2.2rem;
+  font-size: 0.9rem;
+}
+
+/* Scrollbar styling */
+.documentation-navigation::-webkit-scrollbar {
+  width: 4px;
+}
+
+.documentation-navigation::-webkit-scrollbar-track {
+  background: rgba(240, 244, 248, 0.8);
+  border-radius: 4px;
+}
+
+.documentation-navigation::-webkit-scrollbar-thumb {
+  background: rgba(30, 76, 154, 0.2);
+  border-radius: 4px;
+}
+
+.documentation-navigation::-webkit-scrollbar-thumb:hover {
+  background: rgba(30, 76, 154, 0.4);
+}

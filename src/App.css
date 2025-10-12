@@ -1,0 +1,237 @@
+:root {
+  --primary-color: #1e4c9a;
+  --secondary-color: #f0f4f8;
+  --accent-color: #ff6b6b;
+  --text-color: #333;
+  --text-light: #6c757d;
+  --border-color: #e0e0e0;
+  --footer-bg: #f8f9fa;
+  --header-bg: #ffffff;
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  background-color: white;
+  color: var(--primary-color);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.header-button {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s, height 0.5s;
+  z-index: 0;
+}
+
+.header-button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.header-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-button.github-button::after {
+  content: '↗';
+  margin-left: 5px;
+  font-size: 0.9em;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  transform: translateX(-5px);
+}
+
+.header-button.github-button:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.header-button.primary {
+  background-color: var(--accent-color);
+  position: relative;
+  z-index: 1;
+}
+
+.header-button.primary:hover {
+  background-color: #ff5252;
+}
+
+.header-button.primary.downloading {
+  background-color: #ff8c8c;
+  cursor: not-allowed;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem 0;
+  background-color: var(--secondary-color);
+}
+
+.app-footer {
+  background-color: var(--footer-bg);
+  padding: 1.5rem 2rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  border-top: 1px solid var(--border-color);
+  margin-top: 2rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header-content, .footer-content {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .header-actions {
+    margin-top: 0.5rem;
+  }
+
+  .footer-links {
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .documentation-layout {
+    flex-direction: column;
+  }
+
+  .documentation-navigation {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    position: relative;
+    top: 0;
+  }
+}
