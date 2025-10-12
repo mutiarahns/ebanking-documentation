@@ -68,10 +68,10 @@ const DocumentationOverview: React.FC = () => {
   }
 
   // Custom components for ReactMarkdown
-  const components = {
-    h1: (props: HeadingProps) => <HeadingRenderer level={1} {...props} />,
-    h2: (props: HeadingProps) => <HeadingRenderer level={2} {...props} />,
-    h3: (props: HeadingProps) => <HeadingRenderer level={3} {...props} />,
+  const components: Components = {
+    h1: ({ node, ...props }) => <HeadingRenderer level={1} {...props} />,
+    h2: ({ node, ...props }) => <HeadingRenderer level={2} {...props} />,
+    h3: ({ node, ...props }) => <HeadingRenderer level={3} {...props} />,
   };
 
   return (
