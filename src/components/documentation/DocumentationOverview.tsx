@@ -1,19 +1,39 @@
 import React, { useState, useEffect } from "react";
-import ReactMarkdown, { Components } from "react-markdown";
+import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
 import "./DocumentationOverview.css";
 import DocumentationNavigation from "./DocumentationNavigation";
 
-const HeadingRenderer = ({
+// const HeadingRenderer = ({
+//   level,
+//   children,
+// }: {
+//   level: number;
+//   children: React.ReactNode;
+// }) => {
+//   const text = Array.isArray(children)
+//     ? children.join("")
+//     : children?.toString() ?? "";
+
+//   const id = text
+//     .toLowerCase()
+//     .replace(/[^\w\s-]/g, "")
+//     .replace(/\s+/g, "-");
+
+//   const Tag = `h${level}` as React.ElementType;
+//   return <Tag id={id}>{children}</Tag>;
+// };
+
+interface HeadingRendererProps {
+  level: number;
+  children?: React.ReactNode;
+}
+
+const HeadingRenderer: React.FC<HeadingRendererProps> = ({
   level,
   children,
-}: {
-  level: number;
-  children: React.ReactNode;
 }) => {
-  const text = Array.isArray(children)
-    ? children.join("")
-    : children?.toString() ?? "";
-
+  const text = children?.toString() || "";
   const id = text
     .toLowerCase()
     .replace(/[^\w\s-]/g, "")
