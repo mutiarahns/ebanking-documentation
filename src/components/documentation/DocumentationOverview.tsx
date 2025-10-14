@@ -77,7 +77,7 @@ const DocumentationOverview: React.FC = () => {
 
   return (
     <div className="documentation-layout">
-      <DocumentationNavigation markdown={markdown} />
+      {/* <DocumentationNavigation markdown={markdown} /> */}
       <div className="documentation-container">
         <div className="documentation-content">
           <ReactMarkdown components={components}>{markdown}</ReactMarkdown>

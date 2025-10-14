@@ -1,6 +1,6 @@
-import './App.css'
-import DocumentationOverview from './components/documentation/DocumentationOverview'
-import { useState } from 'react'
+import "./App.css";
+import DocumentationOverview from "./components/documentation/DocumentationOverview";
+import { useState } from "react";
 
 function App() {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -8,22 +8,22 @@ function App() {
   const handleDownload = async () => {
     try {
       setIsDownloading(true);
-      const response = await fetch('/README.md');
+      const response = await fetch("/README.md");
       if (!response.ok) {
-        throw new Error('Failed to fetch README.md');
+        throw new Error("Failed to fetch README.md");
       }
       const text = await response.text();
 
       // Create a blob from the text
-      const blob = new Blob([text], { type: 'text/markdown' });
+      const blob = new Blob([text], { type: "text/markdown" });
 
       // Create a URL for the blob
       const url = URL.createObjectURL(blob);
 
       // Create a temporary anchor element
-      const a = document.createElement('a');
+      const a = document.createElement("a");
       a.href = url;
-      a.download = 'ebank-documentation.md';
+      a.download = "ebank-documentation.md";
 
       // Append to the document and trigger a click
       document.body.appendChild(a);
@@ -33,7 +33,7 @@ function App() {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error downloading file:', error);
+      console.error("Error downloading file:", error);
     } finally {
       setIsDownloading(false);
     }
@@ -48,20 +48,22 @@ function App() {
             <h1>EBank Documentation</h1>
           </div>
           <div className="header-actions">
-            <a 
-              href="https://github.com/mutiarahns/ebanking" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://github.com/mutiarahns/ebanking"
+              target="_blank"
+              rel="noopener noreferrer"
               className="header-button github-button"
             >
               GitHub
             </a>
-            <button 
-              className={`header-button primary ${isDownloading ? 'downloading' : ''}`}
+            <button
+              className={`header-button primary ${
+                isDownloading ? "downloading" : ""
+              }`}
               onClick={handleDownload}
               disabled={isDownloading}
             >
-              {isDownloading ? 'Downloading...' : 'Download'}
+              {isDownloading ? "Downloading..." : "Download"}
             </button>
           </div>
         </div>
@@ -80,7 +82,7 @@ function App() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
