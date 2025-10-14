@@ -2,27 +2,6 @@ import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import type { Components } from "react-markdown";
 import "./DocumentationOverview.css";
-import DocumentationNavigation from "./DocumentationNavigation";
-
-// const HeadingRenderer = ({
-//   level,
-//   children,
-// }: {
-//   level: number;
-//   children: React.ReactNode;
-// }) => {
-//   const text = Array.isArray(children)
-//     ? children.join("")
-//     : children?.toString() ?? "";
-
-//   const id = text
-//     .toLowerCase()
-//     .replace(/[^\w\s-]/g, "")
-//     .replace(/\s+/g, "-");
-
-//   const Tag = `h${level}` as React.ElementType;
-//   return <Tag id={id}>{children}</Tag>;
-// };
 
 interface HeadingRendererProps {
   level: number;
@@ -77,7 +56,6 @@ const DocumentationOverview: React.FC = () => {
 
   return (
     <div className="documentation-layout">
-      {/* <DocumentationNavigation markdown={markdown} /> */}
       <div className="documentation-container">
         <div className="documentation-content">
           <ReactMarkdown components={components}>{markdown}</ReactMarkdown>
