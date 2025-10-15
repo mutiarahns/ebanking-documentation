@@ -8,6 +8,7 @@
   - [MVVM + Coordinator](#mvvm--coordinator)
   - [Dependency Injection](#dependency-injection)
 - [Project Structure](#project-structure)
+- [Build Configuration](#build-configuration)
 - [Layer Overview](#layer-overview)
 - [Testing](#testing)
   - [Testing Approach](#testing-approach)
@@ -25,6 +26,7 @@
   - [Adding a New API Endpoint](#adding-a-new-api-endpoint)
   - [Creating a Use Case for a New Feature](#creating-a-use-case-for-a-new-feature)
   - [Implementing Dependency Injection](#implementing-dependency-injection)
+  - [Building for Different Environments](#building-for-different-environments)
 
 ## Project Overview
 
@@ -88,6 +90,7 @@ EBank/
 ├── EBank/              # Main application code
 │
 ├── Application/                  # Application entry point and configuration
+│   ├── Configuration/            # Build configurations
 │   ├── AppDelegate.swift         # UIApplicationDelegate implementation
 │   ├── EBankApp.swift            # SwiftUI App implementation
 │   └── ContentView.swift         # Main content view
@@ -158,6 +161,86 @@ EBank/
             ├── Coordinator/      # Screen coordinator
             └── Presentation/     # Screen presentation
 ```
+
+## Build Configuration
+
+The EBank project supports multiple build configurations for different environments. Each configuration has its own settings, API endpoints, and app identifiers.
+
+### Available Build Configurations
+
+#### 1. Development (Dev)
+
+- **Configuration File**: `DevConfig.xcconfig`
+- **Scheme**: `EBankDevelopment`
+- **Build Configurations**: `DevDebug`, `DevRelease`
+
+#### 2. UAT (User Acceptance Testing)
+
+- **Configuration File**: `UatConfig.xcconfig`
+- **Scheme**: `EBankUat`
+- **Build Configurations**: `UatDebug`, `UatRelease`
+
+#### 3. Production (Prod)
+
+- **Configuration File**: `ProdConfig.xcconfig`
+- **Scheme**: `EBank`
+- **Build Configurations**: `ProductionDebug`, `ProductionRelease`
+
+### Configuration Files Structure
+
+Each environment has its own `.xcconfig` file located in `EBank/Application/Configuration/`:
+
+```
+Configuration/
+├── DevConfig.xcconfig          # Development environment settings
+├── ProdConfig.xcconfig         # Production environment settings
+└── UatConfig.xcconfig          # UAT environment settings
+```
+
+### Configuration Variables
+
+Each `.xcconfig` file contains the following variables:
+
+```
+| Variable         | Description                      | Example                           |
+| ---------------- | -------------------------------- | --------------------------------- |
+| `BASE_URL`       | API base URL for the environment | `https://dummyjson.com`           |
+| `APP_NAME`       | Display name of the application  | `[DEV] EBank`                     |
+| `APP_ICON`       | App icon asset name              | `AppIconDev`                      |
+| `APP_IDENTIFIER` | Bundle identifier                | `co.id.example.project.EBank.dev` |
+| `VERSION_NUMBER` | App version number               | `1.0.0`                           |
+| `BUILD_NUMBER`   | Build number                     | `1`                               |
+```
+
+### Adding New Configuration Variables
+
+To add new configuration variables:
+
+1. Add the variable to all `.xcconfig` files:
+
+   ```xcconfig
+   // In DevConfig.xcconfig
+   NEW_VARIABLE = dev_value
+
+   // In UatConfig.xcconfig
+   NEW_VARIABLE = uat_value
+
+   // In ProdConfig.xcconfig
+   NEW_VARIABLE = prod_value
+   ```
+
+2. Use the variable in your code:
+   ```swift
+   let newValue = Bundle.main.object(forInfoDictionaryKey: "NEW_VARIABLE") as? String
+   ```
+
+### Best Practices
+
+1. **Environment Separation**: Keep development, UAT, and production configurations completely separate
+2. **Security**: Never commit sensitive information like API keys directly in configuration files
+3. **Version Management**: Update version numbers consistently across all environments
+4. **Testing**: Always test builds in UAT environment before production deployment
+5. **Documentation**: Keep configuration documentation up to date when adding new variables
 
 ## Layer Overview
 
@@ -819,3 +902,24 @@ This approach promotes:
 - **Modularity**: Each feature has its own module with clear dependencies
 - **Testability**: Dependencies can be easily mocked for testing
 - **Maintainability**: Dependencies are explicitly defined and centrally managed
+
+### Building for Different Environments
+
+#### Using Xcode Schemes
+
+1. **Development Build**:
+
+   - Select `EBankDevelopment` scheme
+   - Choose `DevDebug` for debugging or `DevRelease` for release
+   - Build and run
+
+2. **UAT Build**:
+
+   - Select `EBankUat` scheme
+   - Choose `UatDebug` for debugging or `UatRelease` for release
+   - Build and run
+
+3. **Production Build**:
+   - Select `EBank` scheme
+   - Choose `ProductionDebug` for debugging or `ProductionRelease` for release
+   - Build and run
