@@ -5,7 +5,7 @@ import "./DocumentationApp.css";
 
 const DocumentationApp: React.FC = () => {
   const [isDownloading, setIsDownloading] = useState(false);
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
 
   const handleDownload = async () => {
     try {
